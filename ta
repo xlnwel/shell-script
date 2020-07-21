@@ -1,0 +1,2 @@
+#!/bin/zsh
+tmux a -t $1

@@ -1,0 +1,17 @@
+#!/bin/zsh
+
+#transfer file to a temporary location and open it in Finder
+
+set -o errexit
+
+server=$1
+remote_path=$2
+
+to_dir=$(mktemp -d)
+cmd="rsync -avPL $server:$remote_path/* '$to_dir'/"
+script="tell application \"iTerm2\"
+    create window with default profile command \"$cmd\"
+end tell"
+echo "$script"
+osascript -e "$script"
+open ${to_dir}

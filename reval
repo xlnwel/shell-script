@@ -1,0 +1,5 @@
+#!/bin/zsh
+source activate drl
+python run/eval.py "${@}"
+# use the following command if the first argument is used to specify the source environment
+# python run/eval.py "${@:2}"
