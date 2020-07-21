@@ -1,18 +1,16 @@
 #!/bin/zsh
 
-FILEPATH="~/github/blog/docs/images/$1"
+FILEPATH=~/github/blog/docs/images/$1
 # Two ways to assign a shell command to a variable
 DIR=`dirname "$FILEPATH"`
 FILE=$(basename "$FILEPATH")
-echo $DIR
-echo $FILE 
 if [ ! -d "$DIR" ]
 then
     read ANS"?$DIR does not exists, do you want to create it?[y/n] "
     if [ $ANS = "y" ]
     then
         echo $DIR
-        mkdir "~/github/blog/docs/images/on-policy"
+        mkdir $DIR
     fi
 fi
 
