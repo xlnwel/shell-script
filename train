@@ -1,3 +1,4 @@
 #!/bin/zsh
+export TF_CPP_MIN_LOG_LEVEL=3
 source activate drl
 python run/train.py "$@"

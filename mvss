@@ -1,17 +1,30 @@
 #!/bin/zsh
 
-FILEPATH=~/github/blog/docs/images/$1
+FILE=$1
+FILEPATH1=$HOME/github/notes/images/$1
+FILEPATH2=$HOME/github/blog/docs/images/$1
 # Two ways to assign a shell command to a variable
-DIR=`dirname "$FILEPATH"`
-FILE=$(basename "$FILEPATH")
-if [ ! -d "$DIR" ]
-then
-    read ANS"?$DIR does not exists, do you want to create it?[y/n] "
-    if [ $ANS = "y" ]
-    then
-        echo $DIR
-        mkdir $DIR
-    fi
-fi
+DIR1=`dirname "$FILEPATH1"`
+DIR2=`dirname "$FILEPATH2"`
 
-find ~/Documents -name "Screen\ Shot\ *" -print0 | xargs -0 -I {} mv {} ~/github/blog/docs/images/$1
+ckdir() {
+    DIR=$1
+    if [ ! -d "$DIR" ]
+    then
+        read ANS"?$DIR does not exists, do you want to create it?[y/n] "
+        if [ $ANS = "y" ]
+        then
+            echo $DIR
+            mkdir $DIR
+        fi
+    fi
+}
+
+ckdir $DIR1
+ckdir $DIR2
+
+find ~/Documents -name "Screen\ Shot\ *" -print0 | xargs -0 -I {} cp {} $FILEPATH1
+echo $? "Destination $FILEPATH1"
+
+find ~/Documents -name "Screen\ Shot\ *" -print0 | xargs -0 -I {} mv {} $FILEPATH2
+echo $? "Destination $FILEPATH2"

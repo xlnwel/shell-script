@@ -1,4 +1,4 @@
 #!/bin/zsh
 f1=$1/$3
 f2=$2/$3
-diff --color ${f1} ${f2}
+diff --color ${f1} ${f2} || colordiff ${f1} ${f2}
